@@ -1,0 +1,93 @@
+ {% extends "checksource/base.html" %}
+{% load bootstrap3 %}
+{% load staticfiles %}
+ {% block header %}
+<h2>查询结果列表:</h2>
+{% endblock header %}
+{% block content %}
+
+<table class="table table-bordered" id="tb" style='table-layout:fixed;'>
+	<thead>
+    <tr>
+        <th style='width:7%;'>检查日期</th>
+        <th style='width:4%;'>检查部门</th>
+        <th style='width:4%;'>检查方式</th>
+        <th style='width:4%;'>检查者</th>
+        <th style='width:10%;'>问题描述</th>
+        <th style='width:3%;'>分类</th>
+        <th style='width:10%;'>整改措施</th>
+        <th style='width:4%;'>部分管责任人</th>
+        <th style='width:5%;'>主控部门</th>
+        <th style='width:5%;'>责任部门</th>
+        <th style='width:4%;'>责任班组</th>
+        <th style='width:4%;'>部门负责人</th>
+        <th style='width:4%;'>具体责任人</th>
+        <th style='width:9%;'>本部门原因分析</th>
+        <th style='width:7%;'>预计关闭日期</th>
+        <th style='width:3%;'>是否落实</th>
+        <th style='width:3%;'>项目分类</th>
+        <th style='width:4%;'>关闭批准人</th>
+        <th style='width:3%;'>备注</th>
+        <th style='width:3%;'>操作</th>        
+    </tr>
+    </thead>
+    <tbody>
+    {% for pblm in problems %}
+    <tr>
+        <td>{{pblm.checkwhen|default_if_none:""}}</td>
+        <td>{{pblm.checkdepartment|default_if_none:""}}</td>
+        <td>{{pblm.checkway|default_if_none:""}}</td>
+        <td>{{pblm.checkwho|default_if_none:""}}</td>
+        <td>{{pblm.problemdetail|default_if_none:""}}</td>
+        <td>{{pblm.problemtype|default_if_none:""}}</td>
+        <td>{{pblm.problemsolve|default_if_none:""}}</td>
+        <td>{{pblm.whoresponsible|default_if_none:""}}</td>
+        <td>{{pblm.departmentincharge|default_if_none:""}}</td>
+        <td>{{pblm.problemdepartment|default_if_none:""}}</td>
+        <td>{{pblm.departmentwho|default_if_none:""}}</td>
+        <td>{{pblm.problemteam|default_if_none:""}}</td>
+        <td>{{pblm.problemwho|default_if_none:""}}</td>
+        <td>{{pblm.problemreason|default_if_none:""}}</td>
+        <td>{{pblm.closedate|default_if_none:""}}</td>
+        <td>
+			{% if pblm.ifdone%}是
+			{%else%}否
+			{%endif%}
+		</td>
+        <td>{{pblm.projecttype|default_if_none:""}}</td>
+        <td>{{pblm.closewho|default_if_none:""}}</td>
+        <td>{{pblm.somethingelse|default_if_none:""}}</td>
+        <td border="0"><a href="{% url 'checksource:problemidcheck' p_id=pblm.id  checkwhenstart=paramdic.checkwhenstart  checkwhenend=paramdic.checkwhenend  checkdepartment=paramdic.checkdepartment  checkway=paramdic.checkway  checkwho=paramdic.checkwho  problemdetail=paramdic.problemdetail  problemtype=paramdic.problemtype  problemsolve=paramdic.problemsolve  whoresponsible=paramdic.whoresponsible  departmentincharge=paramdic.departmentincharge  problemdepartment=paramdic.problemdepartment  departmentwho=paramdic.departmentwho  problemteam=paramdic.problemteam  problemwho=paramdic.problemwho  problemreason=paramdic.problemreason  projecttype=paramdic.projecttype  closewho=paramdic.closewho ifdone=paramdic.ifdone %}">修改</a></td>
+
+        <tr>
+        <td colspan="20">
+{% for i in imgproblem %}
+{%if i.Checkproblem.id == pblm.id%}
+
+<img src = '{{i.img.url}}' height="180px">
+
+<script>
+function myFunction(){
+	var msg = "您真的确定要删除吗？\n\n请确认！";
+if (confirm(msg)==true){
+return true;
+}else{
+return false;
+}
+}
+</script>
+{%endif%}	
+{% endfor %}
+</td>
+</tr>       
+
+</tbody>
+
+    {% empty %}
+<tr>
+        <td colspan="21">未查询到任何数据</td>
+</tr>        
+{% endfor %}
+
+</table>
+{% endblock content %} 

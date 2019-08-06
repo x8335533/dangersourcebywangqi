@@ -1,0 +1,71 @@
+{% load bootstrap3 %}
+{% load staticfiles %}
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="{% static '/css/style.css' %}">
+<title>吉林货运部风险源系统</title>
+ {% bootstrap_css %}
+{% bootstrap_javascript %}
+{{ form.media }}
+ </head>
+
+
+
+<body>
+<!-- Static navbar -->
+ <nav class="navbar navbar-default navbar-static-top">
+<div class="container">
+<div class="navbar-header">
+ <button type="button" class="navbar-toggle collapsed"
+data-toggle="collapse" data-target="#navbar"
+aria-expanded="false" aria-controls="navbar">
+</button>
+ <a class="navbar-brand" href="{% url 'checksource:index' %}">主页</a>
+<a class="navbar-brand" href="{% url 'checksource:inquireinput' %}">查询</a>
+<a class="navbar-brand" href="{% url 'checksource:newproblem' %}">添加</a>
+
+</div>
+
+
+
+
+<!--/.nav-collapse -->
+</div>
+</nav>
+
+<div class="container-fluid">
+<div class="page-header">
+ {% block header %}{% endblock header %}
+</div>
+<div>
+ {% block content %}{% endblock content %}
+</div>
+</div> <!-- /container -->
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

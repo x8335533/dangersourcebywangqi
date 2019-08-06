@@ -1,0 +1,16 @@
+ {% extends "checksource/base.html" %}
+{% load bootstrap3 %}
+{% load staticfiles %}
+
+{% block header %}
+<h2>修改问题的内容:</h2>
+{% endblock header %}
+{% block content %}
+<form action="{% url 'checksource:editproblem' problem.id %}" method='post'>
+{% csrf_token %}
+{% bootstrap_form form %}
+ {% buttons %}
+<button name="submit" class="btn btn-primary">保存修改</button>
+{% endbuttons %}
+</form>
+{% endblock content %}

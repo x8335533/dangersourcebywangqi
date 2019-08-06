@@ -1,0 +1,17 @@
+ {% extends "checksource/base.html" %}
+{% load bootstrap3 %}
+{% load staticfiles %}
+
+{% block header %}
+<h2>修改问题的内容:</h2>
+{% endblock header %}
+{% block content %}
+
+<form action="{% url 'checksource:editproblemcheck' p_id=pblm.id checkwhenstart=paramdic.checkwhenstart  checkwhenend=paramdic.checkwhenend  checkdepartment=paramdic.checkdepartment  checkway=paramdic.checkway  checkwho=paramdic.checkwho  problemdetail=paramdic.problemdetail  problemtype=paramdic.problemtype  problemsolve=paramdic.problemsolve  whoresponsible=paramdic.whoresponsible  departmentincharge=paramdic.departmentincharge  problemdepartment=paramdic.problemdepartment  departmentwho=paramdic.departmentwho  problemteam=paramdic.problemteam  problemwho=paramdic.problemwho  problemreason=paramdic.problemreason  projecttype=paramdic.projecttype  closewho=paramdic.closewho ifdone=paramdic.ifdone %}" method='post'>
+{% csrf_token %}
+{% bootstrap_form form %}
+ {% buttons %}
+<button name="submit" class="btn btn-primary">保存修改</button>
+{% endbuttons %}
+</form>
+{% endblock content %}

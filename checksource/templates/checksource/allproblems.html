@@ -1,0 +1,85 @@
+ {% extends "checksource/base.html" %}
+ 
+{% block content %}
+<p>数据库中的所有问题</p>
+<table border="1">
+    <tr>
+        <th>检查日期</th>
+        <th>检查部门</th>
+        <th>检查方式</th>
+        <th>检查者</th>
+        <th>问题描述</th>
+        <th>问题分类</th>
+        <th>整改措施</th>
+        <th>部分管责任人</th>
+        <th>主控部门</th>
+        <th>责任部门</th>
+        <th>责任班组</th>
+        <th>部门负责人</th>
+        <th>具体责任人</th>
+        <th>本部门原因分析</th>
+        <th>预计关闭日期</th>
+        <th>是否落实</th>
+        <th>项目分类</th>
+        <th>关闭批准人</th>
+        <th>备注</th>
+        <th colspan="2">操作</th>        
+    </tr>
+    {% for pblm in problems %}
+    <tr>
+        <td>{{pblm.checkwhen|default_if_none:""}}</td>
+        <td>{{pblm.checkdepartment|default_if_none:""}}</td>
+        <td>{{pblm.checkway|default_if_none:""}}</td>
+        <td>{{pblm.checkwho|default_if_none:""}}</td>
+        <td>{{pblm.problemdetail|default_if_none:""}}</td>
+        <td>{{pblm.problemtype|default_if_none:""}}</td>
+        <td>{{pblm.problemsolve|default_if_none:""}}</td>
+        <td>{{pblm.whoresponsible|default_if_none:""}}</td>
+        <td>{{pblm.departmentincharge|default_if_none:""}}</td>
+        <td>{{pblm.problemdepartment|default_if_none:""}}</td>
+        <td>{{pblm.departmentwho|default_if_none:""}}</td>
+        <td>{{pblm.problemteam|default_if_none:""}}</td>
+        <td>{{pblm.problemwho|default_if_none:""}}</td>
+        <td>{{pblm.problemreason|default_if_none:""}}</td>
+        <td>{{pblm.closedate|default_if_none:""}}</td>
+        <td>
+			{% if pblm.ifdone%}是
+			{%else%}否
+			{%endif%}
+		</td>
+        <td>{{pblm.projecttype|default_if_none:""}}</td>
+        <td>{{pblm.closewho|default_if_none:""}}</td>
+        <td>{{pblm.somethingelse|default_if_none:""}}</td>
+         <td border="0"><a href="{% url 'checksource:problemid' pblm.id %}">修改</a></td>
+        <tr>
+        <td td colspan="21">
+{% for i in imgproblem %}
+{%if i.Checkproblem.id == pblm.id%}
+
+<img src = '{{i.img.url}}' height="180px">
+
+<script>
+function myFunction(){
+	var msg = "您真的确定要删除吗？\n\n请确认！";
+if (confirm(msg)==true){
+return true;
+}else{
+return false;
+}
+}
+</script>
+{%endif%}	
+{% endfor %}
+</td>
+       
+
+</tr>  
+
+</tr>
+
+    {% empty %}
+<li>数据库为空</li>
+{% endfor %}
+
+</table>
+{% endblock content %} 

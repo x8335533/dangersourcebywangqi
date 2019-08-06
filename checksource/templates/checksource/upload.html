@@ -1,0 +1,25 @@
+ {% extends "checksource/base.html" %}
+{% load bootstrap3 %}
+{% load staticfiles %}
+ {% block header %}
+<h2>上传图片:</h2>
+{% endblock header %}
+{% block content %}
+<form method="POST" enctype = "multipart/form-data" >
+{% csrf_token %}
+<div style="width:300px;height:100px">
+<input type='file' name='img' multiple accept='image/*'>
+</div>
+<div style="width:300px;height:100px">
+ {% buttons %}
+<button type="submit" class="btn btn-primary">保存</button>
+
+	无图片直接点保存按钮即可
+
+{% endbuttons %}
+</div>
+
+</form>
+
+{% endblock content %} 
+
